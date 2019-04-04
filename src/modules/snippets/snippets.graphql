@@ -1,0 +1,24 @@
+type User {
+  id: Int
+  firstName: String!
+  lastName: String!
+}
+
+type Snippet {
+  id: Int
+  content: String!
+  author: User!
+}
+
+type Query {
+  getSnippets: [Snippet]
+  getSnippet: Snippet
+}
+
+input SnippetInput {
+  contnet: String!
+}
+
+type Mutation {
+  addSnippet(snippet: SnippetInput): Snippet
+}
