@@ -1,19 +1,9 @@
-<h1>NestJS Boilerplate
-  <a
-    href="http://nestjs.com/"
-    target="blank"
-  >
-    <img
-      src="https://nestjs.com/img/logo_text.svg"
-      width="65"
-      alt="Nest Logo"
-    />
-  </a>
-</h1>
+<h1>💩GovnoKod💩</h1>
 
 ## Description
 
-[NestJS](https://github.com/nestjs/nest) Boilerplate made with ❤️ by [💡VivifyIdeas💡](https://www.vivifyideas.com).
+Shit and Code in one place. 💩
+Shit happens
 
 ## Installation
 
