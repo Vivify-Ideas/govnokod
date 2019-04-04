@@ -6,7 +6,7 @@
 
 /* tslint:disable */
 export class SnippetInput {
-    contnet: string;
+    content: string;
 }
 
 export class UserLoginInput {
@@ -37,7 +37,7 @@ export abstract class IMutation {
 export abstract class IQuery {
     abstract getSnippets(): Snippet[] | Promise<Snippet[]>;
 
-    abstract getSnippet(): Snippet | Promise<Snippet>;
+    abstract getSnippet(id: number): Snippet | Promise<Snippet>;
 
     abstract temp__(): boolean | Promise<boolean>;
 }
@@ -45,7 +45,7 @@ export abstract class IQuery {
 export class Snippet {
     id?: number;
     content: string;
-    author: User;
+    author?: User;
 }
 
 export class User {

@@ -1,11 +1,24 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
+import { AuthenticationError } from 'apollo-server-express';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from './../config';
-import { AuthModule } from './../auth';
+import { AuthModule, AuthService } from './../auth';
 import { SnippetsModule } from 'modules/snippets/snippets.module';
+import { countBy } from 'lodash';
+
+const EXCLUDED_AUTH_MUTATIONS = [
+  'login',
+  'register',
+];
+
+const shouldCheckAuth = (req) => {
+  const excludedFound = countBy(EXCLUDED_AUTH_MUTATIONS,
+    (excluded) => (req.body.query || '').includes(excluded));
+  return !excludedFound.true;
+};
 
 @Module({
   imports: [
@@ -25,10 +38,23 @@ import { SnippetsModule } from 'modules/snippets/snippets.module';
         } as TypeOrmModuleAsyncOptions;
       },
     }),
-    GraphQLModule.forRoot({
-      typePaths: ['./**/*.graphql'],
-      context({ req }) {
-        // TODO: implement guards
+    GraphQLModule.forRootAsync({
+      imports: [AuthModule],
+      inject: [AuthService],
+      useFactory: (authService: AuthService) => {
+        return {
+          typePaths: ['./**/*.graphql'],
+          context: async ({ req }) => {
+            const user = await authService.getUserByJwt(req.headers.authorization);
+            if (!user && shouldCheckAuth(req)) {
+              throw new AuthenticationError('Please login!');
+            }
+
+            return {
+              user,
+            };
+          },
+        };
       },
     }),
     ConfigModule,

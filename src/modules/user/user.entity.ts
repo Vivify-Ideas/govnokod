@@ -1,6 +1,7 @@
 import { Exclude } from 'class-transformer';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { PasswordTransformer } from './password.transformer';
+import { Snippet } from 'modules/snippets/snippet.entity';
 
 @Entity({
   name: 'users',
@@ -25,6 +26,9 @@ export class User {
   })
   @Exclude()
   password: string;
+
+  @OneToMany(type => Snippet, snippet => snippet.author)
+  snippets: Snippet[];
 }
 
 export class UserFillableFields {

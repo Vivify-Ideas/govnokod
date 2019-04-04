@@ -13,11 +13,13 @@ export class SnippetsService {
   ) {}
 
   getSnippets() {
-    return this.snippetsRepository.find();
+    return this.snippetsRepository.find({
+      relations: ['author'],
+    });
   }
 
   getSnippet(id: number) {
-    return this.snippetsRepository.findOne(id);
+    return this.snippetsRepository.findOne(id, { relations: ['author'] });
   }
 
   addSnippet(content: string, author: User) {

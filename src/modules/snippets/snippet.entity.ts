@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne,
+} from 'typeorm';
 import { User } from 'modules/user';
 
 @Entity()
@@ -10,8 +12,8 @@ export class Snippet {
   @Column({ name: 'content', type: 'text' })
   content: string;
 
-  @OneToOne(type => User)
-  @JoinColumn()
+  @ManyToOne(type => User, author => author.snippets)
+  @JoinColumn({name: 'authorId', referencedColumnName: 'id'})
   author: User;
 
 }

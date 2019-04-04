@@ -12,11 +12,11 @@ type Snippet {
 
 type Query {
   getSnippets: [Snippet]
-  getSnippet: Snippet
+  getSnippet(id: Int!): Snippet
 }
 
 input SnippetInput {
-  contnet: String!
+  content: String!
 }
 
 type Mutation {

@@ -39,6 +39,7 @@ import { AuthResolver } from './auth.resolver';
     JwtStrategy,
   ],
   exports: [
+    AuthService,
     PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
 })

@@ -14,15 +14,15 @@ export class SnippetsResolver {
   }
 
   @Query()
-  getSnippet(id) {
-    return this.snippetsService.getSnippet(id);
+  getSnippet(obj, args) {
+    return this.snippetsService.getSnippet(args.id);
   }
 
   @Mutation()
   addSnippet(obj, args, context) {
     return this.snippetsService.addSnippet(
       args.snippet.content,
-      args.snippet.authorId,
+      context.user,
     );
   }
 }
