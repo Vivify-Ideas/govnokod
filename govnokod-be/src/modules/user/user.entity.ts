@@ -1,7 +1,7 @@
 import { Exclude } from 'class-transformer';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { PasswordTransformer } from './password.transformer';
-import { Snippet } from 'modules/snippets/snippet.entity';
+import { Snippet } from './../snippets/snippet.entity';
 
 @Entity({
   name: 'users',

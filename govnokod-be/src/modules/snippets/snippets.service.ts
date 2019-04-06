@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Snippet } from './snippet.entity';
-import { User } from 'modules/user';
-import { Language } from 'graphql.schema';
+import { User } from './../user';
+import { Language } from './../../graphql.schema';
 
 @Injectable()
 export class SnippetsService {

@@ -1,8 +1,8 @@
 import {
   Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne,
 } from 'typeorm';
-import { User } from 'modules/user';
-import { Language } from 'graphql.schema';
+import { User } from './../user';
+import { Language } from './../../graphql.schema';
 
 @Entity()
 export class Snippet {

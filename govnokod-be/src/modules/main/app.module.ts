@@ -6,7 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from './../config';
 import { AuthModule, AuthService } from './../auth';
-import { SnippetsModule } from 'modules/snippets/snippets.module';
+import { SnippetsModule } from './../snippets/snippets.module';
 import { countBy, startsWith } from 'lodash';
 
 const EXCLUDED_AUTH_MUTATIONS = [
