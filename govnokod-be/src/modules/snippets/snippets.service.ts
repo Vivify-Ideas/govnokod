@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Snippet } from './snippet.entity';
 import { User } from 'modules/user';
+import { Language } from 'graphql.schema';
 
 @Injectable()
 export class SnippetsService {
@@ -22,9 +23,22 @@ export class SnippetsService {
     return this.snippetsRepository.findOne(id, { relations: ['author'] });
   }
 
-  addSnippet(content: string, author: User) {
+  getRandomSnippet(id = null) {
+    return this.snippetsRepository
+      .createQueryBuilder()
+      .where(() => {
+        if (!id) return '';
+        return `id <> ${id}`;
+      })
+      .orderBy('RANDOM()')
+      .limit(1)
+      .getOne();
+  }
+
+  addSnippet(content: string, language: Language, author: User) {
     const snippet = this.snippetsRepository.create({
       content,
+      language,
       author,
     });
     return this.snippetsRepository.save(snippet);

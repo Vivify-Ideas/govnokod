@@ -10,6 +10,11 @@ export class AuthResolver {
     private authService: AuthService,
   ) {}
 
+  @Query()
+  getProfile(obj, args, context) {
+    return context.user;
+  }
+
   @Mutation()
   async login(obj, args) {
     const user = await this.authService.validateUser(args.data);

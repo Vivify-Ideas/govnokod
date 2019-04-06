@@ -7,7 +7,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from './../config';
 import { AuthModule, AuthService } from './../auth';
 import { SnippetsModule } from 'modules/snippets/snippets.module';
-import { countBy } from 'lodash';
+import { countBy, startsWith } from 'lodash';
 
 const EXCLUDED_AUTH_MUTATIONS = [
   'login',
@@ -15,9 +15,10 @@ const EXCLUDED_AUTH_MUTATIONS = [
 ];
 
 const shouldCheckAuth = (req) => {
+  const data = (req.body.query || '');
   const excludedFound = countBy(EXCLUDED_AUTH_MUTATIONS,
-    (excluded) => (req.body.query || '').includes(excluded));
-  return !excludedFound.true;
+    (excluded) => data.includes(excluded));
+  return !excludedFound.true && startsWith(data, 'mutation');
 };
 
 @Module({

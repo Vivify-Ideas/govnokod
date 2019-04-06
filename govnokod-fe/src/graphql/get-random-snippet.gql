@@ -1,0 +1,7 @@
+query GetRandomSnippet($exclude: Int) {
+  getRandomSnippet(exclude: $exclude) {
+    id
+    content
+    language
+  }
+}

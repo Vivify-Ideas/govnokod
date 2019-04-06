@@ -5,8 +5,30 @@
  */
 
 /* tslint:disable */
+export enum Language {
+    PHP = "PHP",
+    C_PLUS_PLUS = "C_PLUS_PLUS",
+    C_SHARP = "C_SHARP",
+    JavaScript = "JavaScript",
+    Java = "Java",
+    C = "C",
+    Python = "Python",
+    SQL = "SQL",
+    Objective_C = "Objective_C",
+    Bash = "Bash",
+    Perl = "Perl",
+    Ruby = "Ruby",
+    VisualBasic = "VisualBasic",
+    Assembler = "Assembler",
+    Lua = "Lua",
+    Swift = "Swift",
+    Haskell = "Haskell",
+    Kotlin = "Kotlin"
+}
+
 export class SnippetInput {
     content: string;
+    language: Language;
 }
 
 export class UserLoginInput {
@@ -35,9 +57,13 @@ export abstract class IMutation {
 }
 
 export abstract class IQuery {
+    abstract getProfile(): User | Promise<User>;
+
     abstract getSnippets(): Snippet[] | Promise<Snippet[]>;
 
     abstract getSnippet(id: number): Snippet | Promise<Snippet>;
+
+    abstract getRandomSnippet(exclude?: number): Snippet | Promise<Snippet>;
 
     abstract temp__(): boolean | Promise<boolean>;
 }
@@ -45,7 +71,8 @@ export abstract class IQuery {
 export class Snippet {
     id?: number;
     content: string;
-    author?: User;
+    author: User;
+    language: string;
 }
 
 export class User {
