@@ -1,0 +1,7 @@
+mutation addSnippet($snippet: String!, $language: Language!) {
+  addSnippet(snippet:{ content: $snippet, language: $language }) {
+    id
+    content
+    language
+  }
+}

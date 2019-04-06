@@ -1,0 +1,32 @@
+type User {
+  id: Int
+  firstName: String!
+  lastName: String!
+  email: String!
+}
+
+input UserRegisterInput {
+  firstName: String!
+  lastName: String!
+  password: String!
+  email: String!
+}
+
+input UserLoginInput {
+  password: String!
+  email: String!
+}
+
+type JWTData {
+  accessToken: String!
+  expiresIn: Int!
+}
+
+type Query {
+  getProfile: User
+}
+
+type Mutation {
+  register(data: UserRegisterInput): JWTData
+  login(data: UserLoginInput): JWTData
+}

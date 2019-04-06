@@ -1,0 +1,48 @@
+type User {
+  id: Int
+  firstName: String!
+  lastName: String!
+}
+
+enum Language {
+  PHP
+  C_PLUS_PLUS
+  C_SHARP
+  JavaScript
+  Java
+  C
+  Python
+  SQL
+  Objective_C
+  Bash
+  Perl
+  Ruby
+  VisualBasic
+  Assembler
+  Lua
+  Swift
+  Haskell
+  Kotlin
+}
+
+type Snippet {
+  id: Int
+  content: String!
+  author: User!
+  language: String!
+}
+
+type Query {
+  getSnippets: [Snippet]
+  getSnippet(id: Int!): Snippet
+  getRandomSnippet(exclude: Int): Snippet
+}
+
+input SnippetInput {
+  content: String!
+  language: Language!
+}
+
+type Mutation {
+  addSnippet(snippet: SnippetInput): Snippet
+}

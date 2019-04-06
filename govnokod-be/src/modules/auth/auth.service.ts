@@ -26,4 +26,13 @@ export class AuthService {
     }
     return user;
   }
+
+  async getUserByJwt(jwt: string) {
+    const decodedPayload = await this.jwtService.decode(jwt) as {email: string, [key: string]: any};
+    if (!decodedPayload) {
+      return null;
+    }
+
+    return this.userService.getByEmail(decodedPayload.email);
+  }
 }
