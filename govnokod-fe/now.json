@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "govnokod",
+  "alias": "govnokod.fun",
+  "builds": [
+    {"src": "package.json", "use": "@now/static-build"}
+  ],
+   "routes": [
+      {"src": "/service-worker.js", "headers": { "cache-control": "s-maxage=0" } },
+      { "handle": "filesystem" },
+      {"src": ".*", "dest": "/index.html"}
+    ],
+   "env": {
+     "VUE_APP_GRAPHQL_HTTP": "https://api.govnokod.fun"
+   }
+}
